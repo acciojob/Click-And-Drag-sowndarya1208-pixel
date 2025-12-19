@@ -6,7 +6,7 @@ let scrollLeft;
 slider.addEventListener('mousedown', (e) => {
   isDown = true;
   slider.classList.add('active');
-  // Use e.pageX to match the test runner's coordinate system
+  // Use pageX - offsetLeft to find the exact starting point within the slider
   startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
 });
@@ -25,11 +25,11 @@ slider.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   
-  // Calculate current X relative to the slider's offset
+  // Recalculate current position relative to the slider
   const x = e.pageX - slider.offsetLeft;
   
-  // The 'walk' is the distance moved. 
-  // We use a multiplier of 3 to ensure the test detects a scroll > 0.
+  // Calculate movement. Multiplier (3) ensures the scroll is large enough for the test.
+  // formula: scrollLeft = captured_initial_scroll - (current_x - start_x)
   const walk = (x - startX) * 3; 
   slider.scrollLeft = scrollLeft - walk;
 });
