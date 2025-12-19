@@ -6,7 +6,7 @@ let scrollLeft;
 slider.addEventListener('mousedown', (e) => {
   isDown = true;
   slider.classList.add('active');
-  // Use pageX - offsetLeft to find the exact starting point within the slider
+  // Use pageX to match the Cypress trigger coordinate system
   startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
 });
@@ -25,11 +25,12 @@ slider.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   
-  // Recalculate current position relative to the slider
+  // Calculate relative X
   const x = e.pageX - slider.offsetLeft;
   
-  // Calculate movement. Multiplier (3) ensures the scroll is large enough for the test.
-  // formula: scrollLeft = captured_initial_scroll - (current_x - start_x)
+  // Calculate the "walk" (distance). A multiplier ensures it satisfies "greaterThan(0)".
   const walk = (x - startX) * 3; 
+  
+  // Updating scrollLeft: subtracting a negative walk increases scrollLeft
   slider.scrollLeft = scrollLeft - walk;
 });

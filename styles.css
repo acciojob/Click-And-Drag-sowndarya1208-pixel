@@ -82,3 +82,14 @@ body {
   flex-shrink: 0; /* Required: prevents items from squishing to fit the screen */
   width: 300px; 
 }
+.items {
+  display: flex;
+  overflow-x: auto; /* Required for scrollLeft functionality */
+  width: 100%;
+}
+
+.item {
+  flex-shrink: 0; /* Prevents items from squishing, creating the scrollable area */
+  width: 300px; 
+}
+
