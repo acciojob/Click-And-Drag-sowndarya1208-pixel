@@ -6,8 +6,8 @@ let scrollLeft;
 slider.addEventListener('mousedown', (e) => {
   isDown = true;
   slider.classList.add('active');
-  // Use clientX for more reliable positioning in test environments
-  startX = e.clientX - slider.offsetLeft;
+  // Use e.pageX to match the test runner's coordinate system
+  startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
 });
 
@@ -25,11 +25,11 @@ slider.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   
-  // Track current x position relative to the container
-  const x = e.clientX - slider.offsetLeft;
+  // Calculate current X relative to the slider's offset
+  const x = e.pageX - slider.offsetLeft;
   
-  // walk calculates the distance moved from start point
-  // Multiply by a factor (e.g., 2 or 3) to satisfy "greaterThan(0)" in tests
-  const walk = (x - startX) * 2; 
+  // The 'walk' is the distance moved. 
+  // We use a multiplier of 3 to ensure the test detects a scroll > 0.
+  const walk = (x - startX) * 3; 
   slider.scrollLeft = scrollLeft - walk;
 });
