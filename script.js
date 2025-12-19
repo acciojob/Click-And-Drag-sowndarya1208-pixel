@@ -1,4 +1,5 @@
 const slider = document.querySelector('.items');
+
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -6,8 +7,7 @@ let scrollLeft;
 slider.addEventListener('mousedown', (e) => {
   isDown = true;
   slider.classList.add('active');
-  // Use pageX to match the Cypress trigger coordinate system
-  startX = e.pageX - slider.offsetLeft;
+  startX = e.pageX;
   scrollLeft = slider.scrollLeft;
 });
 
@@ -24,13 +24,7 @@ slider.addEventListener('mouseup', () => {
 slider.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
-  
-  // Calculate relative X
-  const x = e.pageX - slider.offsetLeft;
-  
-  // Calculate the "walk" (distance). A multiplier ensures it satisfies "greaterThan(0)".
-  const walk = (x - startX) * 3; 
-  
-  // Updating scrollLeft: subtracting a negative walk increases scrollLeft
+
+  const walk = (e.pageX - startX) * 2;
   slider.scrollLeft = scrollLeft - walk;
 });

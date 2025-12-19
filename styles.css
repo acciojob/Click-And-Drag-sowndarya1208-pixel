@@ -1,95 +1,36 @@
-html {
-  box-sizing: border-box;
-  background: url('source.unsplash.com') fixed;
-  background-size: cover;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
   margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
 }
 
 .items {
-  height: 800px;
-  width: 100%;
-  padding: 100px;
-  border: 1px solid white;
-  background: rgba(255, 255, 255, 0.1);
-  
-  /* FIXED: Use flexbox to ensure visibility and proper child sizing */
+  width: 90%;
+  height: 300px;
   display: flex;
+  gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
-  
-  cursor: pointer;
+  cursor: grab;
   user-select: none;
-  position: relative;
-  perspective: 500px;
-  transition: background 0.2s;
 }
 
 .items.active {
-  background: rgba(255, 255, 255, 0.3);
   cursor: grabbing;
-  /* FIXED: Removed transform: scale(1) to keep size stable during tests */
 }
 
 .item {
-  /* FIXED: Ensure items don't shrink in a flex container */
-  flex: 0 0 200px; 
-  height: calc(100% - 40px);
-  margin-right: 20px;
-  
-  display: inline-flex;
+  flex-shrink: 0;          /* VERY IMPORTANT */
+  width: 300px;
+  height: 100%;
+  background: dodgerblue;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
-  font-weight: 100;
-  color: rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.15);
+  font-size: 60px;
+  color: white;
+  border-radius: 10px;
 }
-
-/* Item Colors */
-.item:nth-child(9n+1) { background: dodgerblue; }
-.item:nth-child(9n+2) { background: goldenrod; }
-.item:nth-child(9n+3) { background: paleturquoise; }
-.item:nth-child(9n+4) { background: gold; }
-.item:nth-child(9n+5) { background: cadetblue; }
-.item:nth-child(9n+6) { background: tomato; }
-.item:nth-child(9n+7) { background: lightcoral; }
-.item:nth-child(9n+8) { background: darkslateblue; }
-.item:nth-child(9n+9) { background: rebeccapurple; }
-
-/* 3D Effect */
-.item:nth-child(even) { transform: scaleX(1.31) rotateY(40deg); }
-.item:nth-child(odd) { transform: scaleX(1.31) rotateY(-40deg); }
-.items {
-  display: flex;
-  overflow-x: auto; /* Required for scrollLeft to work */
-  width: 100%;
-  cursor: pointer;
-}
-
-.item {
-  flex-shrink: 0; /* Required: prevents items from squishing to fit the screen */
-  width: 300px; 
-}
-.items {
-  display: flex;
-  overflow-x: auto; /* Required for scrollLeft functionality */
-  width: 100%;
-}
-
-.item {
-  flex-shrink: 0; /* Prevents items from squishing, creating the scrollable area */
-  width: 300px; 
-}
-
