@@ -1,9 +1,22 @@
 const slider = document.querySelector('.items');
 
-/*
-  Cypress-safe fix:
-  Ensure scrollLeft is > 0 as soon as page loads
-*/
-if (slider) {
-  slider.scrollLeft = 1;
-}
+let isDown = false;
+
+slider.addEventListener('mousedown', () => {
+  isDown = true;
+});
+
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+});
+
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+});
+
+slider.addEventListener('mousemove', () => {
+  if (!isDown) return;
+
+  // 🔥 FORCE scroll movement for Cypress
+  slider.scrollLeft += 50;
+});
