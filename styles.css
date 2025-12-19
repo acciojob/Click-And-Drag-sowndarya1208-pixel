@@ -71,3 +71,14 @@ body {
 /* 3D Effect */
 .item:nth-child(even) { transform: scaleX(1.31) rotateY(40deg); }
 .item:nth-child(odd) { transform: scaleX(1.31) rotateY(-40deg); }
+.items {
+  display: flex;
+  overflow-x: auto; /* Required for scrollLeft to work */
+  width: 100%;
+  cursor: pointer;
+}
+
+.item {
+  flex-shrink: 0; /* Required: prevents items from squishing to fit the screen */
+  width: 300px; 
+}
